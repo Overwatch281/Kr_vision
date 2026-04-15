@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %}Recherche — K.R Vision{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+
+        <!-- Barre de recherche -->
+        <form method="get" action="/search/" style="display:flex; gap:12px; margin-bottom:40px;">
+            <input type="text" name="q" value="{{ query }}"
+                   placeholder="Rechercher..."
+                   style="flex:1; padding:14px 20px; border:1px solid var(--border);
+                          border-radius:25px; font-size:1rem;">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-search"></i> Rechercher
+            </button>
+        </form>
+
+        {% if query %}
+        <p style="color:var(--gray); margin-bottom:30px;">
+            Résultats pour : <strong>{{ query }}</strong>
+        </p>
+
+        <!-- Services -->
+        {% if services %}
+        <h3 style="color:var(--primary); margin-bottom:16px;">
+            <i class="fas fa-cogs"></i> Services ({{ services.count }})
+        </h3>
+        <div class="grid-3" style="margin-bottom:40px;">
+            {% for s in services %}
+            <div class="card">
+                <div class="card-icon"><i class="fas {{ s.icon }}"></i></div>
+                <h3>{{ s.title }}</h3>
+                <p>{{ s.description|truncatewords:15 }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Offres -->
+        {% if jobs %}
+        <h3 style="color:var(--primary); margin-bottom:16px;">
+            <i class="fas fa-briefcase"></i> Offres d'emploi ({{ jobs.count }})
+        </h3>
+        {% for job in jobs %}
+        <div class="card" style="margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <div>
+                <strong>{{ job.title }}</strong>
+                <p style="color:var(--gray); font-size:0.9rem; margin-top:4px;">
+                    {{ job.location }} — {{ job.get_contract_type_display }}
+                </p>
+            </div>
+            <a href="/jobs/{{ job.pk }}/" class="btn btn-primary">Voir</a>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <!-- Articles -->
+        {% if articles %}
+        <h3 style="color:var(--primary); margin:30px 0 16px;">
+            <i class="fas fa-newspaper"></i> Articles ({{ articles.count }})
+        </h3>
+        <div class="grid-3">
+            {% for a in articles %}
+            <div class="card">
+                <p style="color:var(--accent); font-size:0.85rem;">{{ a.created_at|date:"d/m/Y" }}</p>
+                <h3 style="margin-top:8px;">{{ a.title }}</h3>
+                <p style="color:var(--gray); margin-top:8px;">{{ a.content|truncatewords:15 }}</p>
+                <a href="/blog/{{ a.slug }}/" style="color:var(--accent); font-weight:600; text-decoration:none; display:inline-block; margin-top:12px;">
+                    Lire <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if not services and not jobs and not articles %}
+        <div style="text-align:center; padding:60px 0; color:var(--gray);">
+            <i class="fas fa-search" style="font-size:3rem; display:block; margin-bottom:16px;"></i>
+            Aucun résultat pour <strong>{{ query }}</strong>
+        </div>
+        {% endif %}
+
+        {% else %}
+        <div style="text-align:center; padding:60px 0; color:var(--gray);">
+            <i class="fas fa-search" style="font-size:3rem; display:block; margin-bottom:16px;"></i>
+            Tapez un mot clé pour rechercher
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,39 @@
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3><span class="logo-kr">K.R</span> Vision Holding</h3>
+                <p>Votre partenaire international pour la croissance et l'excellence.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="/services/">Services</a></li>
+                    <li><a href="/jobs/">Offres d'emploi</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p><i class="fas fa-envelope"></i> contact@krvision.com</p>
+                <p><i class="fab fa-whatsapp"></i> +XXX XXX XXX XXX</p>
+            </div>
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <p style="margin-bottom:12px;">Restez informé de nos actualités</p>
+                <form method="post" action="/contact/newsletter/" style="display:flex; gap:8px; flex-wrap:wrap;">
+                    {% csrf_token %}
+                    <input type="email" name="email" placeholder="votre@email.com"
+                           style="flex:1; padding:10px; border-radius:25px; border:none; font-size:0.9rem; min-width:160px;">
+                    <button type="submit" class="btn btn-primary" style="padding:10px 20px; font-size:0.9rem;">
+                        OK
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 K.R Vision Holding. Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>

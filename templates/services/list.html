@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Services — K.R Vision{% endblock %}
+
+{% block content %}
+<section class="hero" style="padding: 60px 0;">
+    <div class="container">
+        <h1>Nos <span>Services</span></h1>
+        <p>Des solutions complètes pour votre réussite</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="grid-3">
+            {% for service in services %}
+            <div class="card">
+                <div class="card-icon"><i class="fas {{ service.icon }}"></i></div>
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description }}</p>
+            </div>
+            {% empty %}
+            <p style="grid-column:1/-1; text-align:center; color:var(--gray)">
+                Aucun service disponible pour le moment.
+            </p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

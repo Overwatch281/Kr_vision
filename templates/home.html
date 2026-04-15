@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}K.R Vision Holding — Accueil{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <h1>Bienvenue chez <span>K.R Vision</span> Holding</h1>
+        <p>Votre partenaire international pour la croissance, l'excellence et l'innovation.</p>
+        <div class="hero-buttons">
+            <a href="/services/" class="btn btn-primary">Nos services</a>
+            <a href="/contact/" class="btn btn-secondary">Nous contacter</a>
+        </div>
+    </div>
+</section>
+
+<!-- Services -->
+<section class="section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Nos Services</h2>
+            <p>Des solutions adaptées à vos besoins</p>
+            <div class="accent-line"></div>
+        </div>
+        <div class="grid-3">
+            {% for service in services %}
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas {{ service.icon }}"></i>
+                </div>
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description|truncatewords:20 }}</p>
+            </div>
+            {% empty %}
+            <p style="text-align:center; color: var(--gray); grid-column: 1/-1;">
+                Aucun service disponible pour le moment.
+            </p>
+            {% endfor %}
+        </div>
+        <div style="text-align:center; margin-top: 40px;">
+            <a href="/services/" class="btn btn-primary">Voir tous nos services</a>
+        </div>
+    </div>
+</section>
+
+<!-- Pourquoi nous -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-title">
+            <h2>Pourquoi nous choisir ?</h2>
+            <p>Ce qui nous distingue</p>
+            <div class="accent-line"></div>
+        </div>
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-globe"></i></div>
+                <h3>Présence internationale</h3>
+                <p>Un réseau mondial pour accompagner votre développement à l'international.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-handshake"></i></div>
+                <h3>Partenariats solides</h3>
+                <p>Des partenaires de confiance sélectionnés avec soin pour garantir la qualité.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Expertise prouvée</h3>
+                <p>Des années d'expérience au service de votre croissance et réussite.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Offres d'emploi -->
+<section class="section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Rejoignez notre équipe</h2>
+            <p>Découvrez nos offres d'emploi</p>
+            <div class="accent-line"></div>
+        </div>
+        <div style="text-align:center;">
+            <a href="/jobs/" class="btn btn-primary">Voir les offres</a>
+        </div>
+    </div>
+</section>
+<!-- Partenaires -->
+{% if partners %}
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-title">
+            <h2>Nos Partenaires</h2>
+            <div class="accent-line"></div>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:30px; justify-content:center; align-items:center;">
+            {% for partner in partners %}
+            <a href="{{ partner.website }}" target="_blank"
+               style="display:block; padding:16px 24px; background:white;
+                      border-radius:var(--radius); box-shadow:var(--shadow);
+                      transition:var(--transition);"
+               onmouseover="this.style.transform='translateY(-4px)'"
+               onmouseout="this.style.transform='translateY(0)'">
+                {% if partner.logo %}
+                <img src="{{ partner.logo.url }}" alt="{{ partner.name }}"
+                     style="height:50px; object-fit:contain;">
+                {% else %}
+                <span style="font-weight:700; color:var(--primary); font-size:1.1rem;">
+                    {{ partner.name }}
+                </span>
+                {% endif %}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

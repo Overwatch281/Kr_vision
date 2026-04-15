@@ -1,0 +1,28 @@
+{% load static %}
+<nav class="navbar">
+    <div class="container">
+        <a href="/" class="logo">
+            <span class="logo-kr">K.R</span> Vision
+        </a>
+        <button class="nav-toggle" id="navToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/services/">Services</a></li>
+            <li><a href="/jobs/">Offres</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/contact/">Contact</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="/dashboard/" class="btn-nav">Mon espace</a></li>
+                <li><a href="/accounts/logout/">Déconnexion</a></li>
+            {% else %}
+                <li><a href="/accounts/login/" class="btn-nav">Connexion</a></li>
+            {% endif %}
+        </ul>
+        <form method="get" action="/search/" class="nav-search">
+            <input type="text" name="q" placeholder="Rechercher...">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+</nav>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Connexion — K.R Vision{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container" style="max-width:500px;">
+        <div class="card">
+            <h2 style="color:var(--primary); margin-bottom:24px; text-align:center;">Connexion</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Nom d'utilisateur</label>
+                    <input type="text" name="username" required placeholder="Votre pseudo">
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" name="password" required placeholder="Votre mot de passe">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;">Se connecter</button>
+            </form>
+            <p style="text-align:center; margin-top:16px; color:var(--gray);">
+                Pas encore de compte ? <a href="/accounts/register/" style="color:var(--accent);">S'inscrire</a>
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

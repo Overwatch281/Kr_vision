@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Offres d'emploi — K.R Vision{% endblock %}
+
+{% block content %}
+<section class="hero" style="padding: 60px 0;">
+    <div class="container">
+        <h1>Offres d'<span>emploi</span></h1>
+        <p>Rejoignez une équipe internationale et ambitieuse</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        {% for job in jobs %}
+        <div class="card" style="margin-bottom: 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+            <div>
+                <h3>{{ job.title }}</h3>
+                <p style="color:var(--gray); margin-top:6px;">
+                    <i class="fas fa-map-marker-alt"></i> {{ job.location }} &nbsp;|&nbsp;
+                    <i class="fas fa-briefcase"></i> {{ job.get_contract_type_display }}
+                </p>
+                <p style="margin-top:10px;">{{ job.description|truncatewords:25 }}</p>
+            </div>
+            <a href="/jobs/{{ job.pk }}/" class="btn btn-primary">Voir l'offre</a>
+        </div>
+        {% empty %}
+        <p style="text-align:center; color:var(--gray)">Aucune offre disponible pour le moment.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
